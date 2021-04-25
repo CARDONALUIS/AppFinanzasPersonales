@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  final appTitle = 'FinApp';
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: appTitle,
+      title: 'Flutter Demo',
       theme: ThemeData(
         // Define the default brightness and colors.
         brightness: Brightness.dark,
@@ -26,74 +27,135 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
       ),
-      home: MyHomePage(title: appTitle),
+      home: MyHomePage(title: 'FinApp'),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+//class MyHomePage extends StatefulWidget  {
+class MyHomePage extends StatefulWidget {
+  //final String title;
+
+  //MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key key, this.title}) : super(key: key);
+
   final String title;
 
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Center(child: Text('Inicio de FinApp!')),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Has presionado el botón tantas veces:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
               child: Text('Menu FinApp'),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.lightBlue[800],
               ),
             ),
             ListTile(
               title: Text('Registrar ingresos y egresos'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
                 Navigator.pop(context);
+                final snackBar = SnackBar(
+                  content: Text('Yay! Opcion 1!'),
+                  action: SnackBarAction(
+                    label: 'Deshacer',
+                    onPressed: () {
+                      // Some code to undo the change.
+                    },
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
             ListTile(
               title: Text('Presupuesto'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
                 Navigator.pop(context);
+                final snackBar = SnackBar(
+                  content: Text('Yay! Opcion 2!'),
+                  action: SnackBarAction(
+                    label: 'Deshacer',
+                    onPressed: () {
+                      // Some code to undo the change.
+                    },
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
             ListTile(
               title: Text('Gastos'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
                 Navigator.pop(context);
+                final snackBar = SnackBar(
+                  content: Text('Yay! Opcion 3!'),
+                  action: SnackBarAction(
+                    label: 'Deshacer',
+                    onPressed: () {
+                      // Some code to undo the change.
+                    },
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
             ListTile(
               title: Text('Configuracion del perfil'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
                 Navigator.pop(context);
+                final snackBar = SnackBar(
+                  content: Text('Yay! Opcion 4!'),
+                  action: SnackBarAction(
+                    label: 'Deshacer',
+                    onPressed: () {
+                      // Some code to undo the change.
+                    },
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
