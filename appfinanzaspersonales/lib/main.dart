@@ -5,22 +5,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // Define the default brightness and colors.
         brightness: Brightness.dark,
         primaryColor: Colors.lightBlue[800],
         accentColor: Colors.cyan[600],
-
-        // Define the default font family.
         fontFamily: 'Georgia',
-
-        // Define the default TextTheme. Use this to specify the default
-        // text styling for headlines, titles, bodies of text, and more.
         textTheme: TextTheme(
           headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
           headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
@@ -32,11 +25,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//class MyHomePage extends StatefulWidget  {
 class MyHomePage extends StatefulWidget {
-  //final String title;
-
-  //MyHomePage({Key? key, required this.title}) : super(key: key);
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
@@ -88,64 +77,43 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text('Registrar ingresos y egresos'),
               onTap: () {
                 Navigator.pop(context);
-                final snackBar = SnackBar(
-                  content: Text('Yay! Opcion 1!'),
-                  action: SnackBarAction(
-                    label: 'Deshacer',
-                    onPressed: () {
-                      // Some code to undo the change.
-                    },
-                  ),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RegIngYEgrePantalla()),
                 );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
             ListTile(
               title: Text('Presupuesto'),
               onTap: () {
                 Navigator.pop(context);
-                final snackBar = SnackBar(
-                  content: Text('Yay! Opcion 2!'),
-                  action: SnackBarAction(
-                    label: 'Deshacer',
-                    onPressed: () {
-                      // Some code to undo the change.
-                    },
-                  ),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PresupuestosPantalla()),
                 );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
             ListTile(
               title: Text('Gastos'),
               onTap: () {
                 Navigator.pop(context);
-                final snackBar = SnackBar(
-                  content: Text('Yay! Opcion 3!'),
-                  action: SnackBarAction(
-                    label: 'Deshacer',
-                    onPressed: () {
-                      // Some code to undo the change.
-                    },
-                  ),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => GastosPantalla()),
                 );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
             ListTile(
               title: Text('Configuracion del perfil'),
               onTap: () {
                 Navigator.pop(context);
-                final snackBar = SnackBar(
-                  content: Text('Yay! Opcion 4!'),
-                  action: SnackBarAction(
-                    label: 'Deshacer',
-                    onPressed: () {
-                      // Some code to undo the change.
-                    },
-                  ),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ConfiPerfilPantalla()),
                 );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
             ),
           ],
@@ -156,6 +124,82 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class RegIngYEgrePantalla extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Registro de Ingresos y Egresos"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Regresar!'),
+        ),
+      ),
+    );
+  }
+}
+
+class PresupuestosPantalla extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Presupuestos"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Regresar!'),
+        ),
+      ),
+    );
+  }
+}
+
+class GastosPantalla extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Gastos"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Regresar!'),
+        ),
+      ),
+    );
+  }
+}
+
+class ConfiPerfilPantalla extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Configuracion del perfil"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Regresar!'),
+        ),
+      ),
     );
   }
 }
