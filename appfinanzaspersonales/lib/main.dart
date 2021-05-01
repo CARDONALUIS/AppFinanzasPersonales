@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Has presionado el botón tantas veces:',
+              'Has presionado:',
             ),
             Text(
               '$_counter',
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             ListTile(
-              title: Text('Registrar ingresos y egresos'),
+              title: Text('Ingresos y egresos'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
