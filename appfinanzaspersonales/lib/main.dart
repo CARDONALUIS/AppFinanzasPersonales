@@ -31,11 +31,63 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
+  //_MyCustomFormState createState() => _MyCustomFormState();
   _MyHomePageState createState() => _MyHomePageState();
+}
+
+// Define a corresponding State class.
+// This class holds the data related to the Form.
+class _MyCustomFormState extends State<MyHomePage> {
+  // Create a text controller and use it to retrieve the current value
+  // of the TextField.
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Retrieve Text Input'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextField(
+          controller: myController,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        // When the user presses the button, show an alert dialog containing
+        // the text that the user has entered into the text field.
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                // Retrieve the text the that user has entered by using the
+                // TextEditingController.
+                content: Text(myController.text),
+              );
+            },
+          );
+        },
+        tooltip: 'Show me the value!',
+        child: Icon(Icons.text_fields),
+      ),
+    );
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  // Create a text controller and use it to retrieve the current value
+  // of the TextField.
+  //final myController = TextEditingController();
 
   void _incrementCounter() {
     setState(() {
@@ -49,20 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Has presionado:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
+      body: Center(),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -113,6 +152,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => ConfiPerfilPantalla()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text('Login'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PantallaLogin()),
                 );
               },
             ),
@@ -199,6 +248,68 @@ class ConfiPerfilPantalla extends StatelessWidget {
           },
           child: Text('Regresar!'),
         ),
+      ),
+    );
+  }
+}
+
+class PantallaLogin extends StatelessWidget {
+  // controlador de editor de texto
+  final usuarioController = TextEditingController();
+  final contrasenaController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Login"),
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 60.0),
+              child: Center(
+                child: TextField(
+                  controller: usuarioController,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 60.0),
+              child: Center(
+                child: TextField(
+                  controller: contrasenaController,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        // When the user presses the button, show an alert dialog containing
+        // the text that the user has entered into the text field.
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              if (usuarioController.text == "admin" &&
+                  contrasenaController.text == "admin") {
+                return AlertDialog(
+                  // Retrieve the text the that user has entered by using the
+                  // TextEditingController.
+                  content: Text("login existoso!"),
+                );
+              } else {
+                return AlertDialog(
+                  content: Text("credenciales incorrectas!"),
+                );
+              }
+            },
+          );
+        },
+        tooltip: 'Show me the value!',
+        child: Icon(Icons.text_fields),
       ),
     );
   }
