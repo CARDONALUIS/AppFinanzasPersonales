@@ -10,9 +10,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         primaryColor: Colors.lightBlue[800],
-        accentColor: Colors.amber[800],
+        accentColor: Colors.lightBlue[800],
+        //primaryColor: Color.fromRGBO(43, 147, 72, 0),
         fontFamily: 'Georgia',
         textTheme: TextTheme(
           headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
@@ -253,10 +254,11 @@ class ConfiPerfilPantalla extends StatelessWidget {
   }
 }
 
+final usuarioController = TextEditingController();
+final contrasenaController = TextEditingController();
+
 class PantallaLogin extends StatelessWidget {
   // controlador de editor de texto
-  final usuarioController = TextEditingController();
-  final contrasenaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -267,7 +269,8 @@ class PantallaLogin extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-            Padding(
+            miCard(),
+            /*Padding(
               padding: const EdgeInsets.only(top: 60.0),
               child: Center(
                 child: TextField(
@@ -282,7 +285,7 @@ class PantallaLogin extends StatelessWidget {
                   controller: contrasenaController,
                 ),
               ),
-            )
+            )*/
           ],
         ),
       ),
@@ -309,8 +312,43 @@ class PantallaLogin extends StatelessWidget {
           );
         },
         tooltip: 'Show me the value!',
-        child: Icon(Icons.text_fields),
+        child: Icon(Icons.supervised_user_circle),
       ),
     );
   }
+}
+
+Card miCard() {
+  return Card(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    margin: EdgeInsets.all(15),
+    elevation: 10,
+    child: Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Center(
+            child: TextField(
+              controller: usuarioController,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Center(
+            child: TextField(
+              controller: contrasenaController,
+            ),
+          ),
+        )
+        /*ListTile(
+          contentPadding: EdgeInsets.fromLTRB(15, 10, 25, 0),
+          title: Text('Titulo'),
+          subtitle: Text(
+              'Este es el subtitulo del card. Aqui podemos colocar descripción de este card.'),
+          leading: Icon(Icons.home),
+        ),*/
+      ],
+    ),
+  );
 }
