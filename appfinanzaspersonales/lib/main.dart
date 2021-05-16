@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
       ),
-      home: MyHomePage(title: 'FinApp'),
+      home: MyHomePage(title: 'Historial'),
     );
   }
 }
@@ -43,71 +43,97 @@ class MyHomePage extends StatefulWidget {
 
 // Define a corresponding State class.
 // This class holds the data related to the Form.
-class _MyCustomFormState extends State<MyHomePage> {
-  // Create a text controller and use it to retrieve the current value
-  // of the TextField.
-  final myController = TextEditingController();
+// class _MyCustomFormState extends State<MyHomePage> {
+//   // Create a text controller and use it to retrieve the current value
+//   // of the TextField.
+//   final myController = TextEditingController();
 
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     // Clean up the controller when the widget is disposed.
+//     myController.dispose();
+//     super.dispose();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Retrieve Text Input'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: TextField(
-          controller: myController,
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        // When the user presses the button, show an alert dialog containing
-        // the text that the user has entered into the text field.
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                // Retrieve the text the that user has entered by using the
-                // TextEditingController.
-                content: Text(myController.text),
-              );
-            },
-          );
-        },
-        tooltip: 'Show me the value!',
-        child: Icon(Icons.text_fields),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Retrieve Text Input'),
+//       ),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: TextField(
+//           controller: myController,
+//         ),
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         // When the user presses the button, show an alert dialog containing
+//         // the text that the user has entered into the text field.
+//         onPressed: () {
+//           showDialog(
+//             context: context,
+//             builder: (context) {
+//               return AlertDialog(
+//                 // Retrieve the text the that user has entered by using the
+//                 // TextEditingController.
+//                 content: Text(myController.text),
+//               );
+//             },
+//           );
+//         },
+//         tooltip: 'Show me the value!',
+//         child: Icon(Icons.text_fields),
+//       ),
+//     );
+//   }
+// }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  // Create a text controller and use it to retrieve the current value
-  // of the TextField.
-  //final myController = TextEditingController();
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(),
+      body: Container(
+        child: Column(
+          // por cada ingreso e ingreso de la base de datos, crear un card
+          children: [
+            SizedBox(
+              width: double.infinity,
+              // height: 135,
+              child: HistorialCard("Egreso"),
+            ),
+            SizedBox(
+              width: double.infinity,
+              // height: 135,
+              child: HistorialCard("Ingreso"),
+            ),
+            SizedBox(
+              width: double.infinity,
+              // height: 135,
+              child: HistorialCard("Ingreso"),
+            ),
+            SizedBox(
+              width: double.infinity,
+              // height: 135,
+              child: HistorialCard("Egreso"),
+            ),
+            SizedBox(
+              width: double.infinity,
+              // height: 135,
+              child: HistorialCard("Ingreso"),
+            ),
+            SizedBox(
+              width: double.infinity,
+              // height: 135,
+              child: HistorialCard("Egreso"),
+            ),
+            // el scroll no funciona
+          ],
+        ),
+      ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -115,13 +141,13 @@ class _MyHomePageState extends State<MyHomePage> {
             DrawerHeader(
               child: Text('Listado'),
               decoration: BoxDecoration(
-                color: Color.fromRGBO(255, 255, 168, 1),
+                color: Color.fromRGBO(156, 204, 100, 1),
               ),
             ),
             Ink(
                 color: Color.fromRGBO(0, 200, 83, 1),
                 child: ListTile(
-                  title: Text('°Ingresos y egresos'),
+                  title: Text('       °Ingresos y egresos'),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -134,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Ink(
                 color: Color.fromRGBO(0, 200, 83, 1),
                 child: ListTile(
-                  title: Text('°Presupuesto'),
+                  title: Text('       °Presupuesto'),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -147,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Ink(
                 color: Color.fromRGBO(0, 200, 83, 1),
                 child: ListTile(
-                  title: Text('°Gastos'),
+                  title: Text('       °Gastos'),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -159,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Ink(
                 color: Color.fromRGBO(0, 200, 83, 1),
                 child: ListTile(
-                  title: Text('°Configuracion del perfil'),
+                  title: Text('       °Configuracion del perfil'),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -182,11 +208,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
@@ -206,7 +227,7 @@ class PantallaLogin extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-            miCard(),
+            loginCard(),
           ],
         ),
       ),
@@ -239,7 +260,7 @@ class PantallaLogin extends StatelessWidget {
   }
 }
 
-Card miCard() {
+Card loginCard() {
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     margin: EdgeInsets.all(15),
@@ -271,6 +292,36 @@ Card miCard() {
           ),
         )
       ],
+    ),
+  );
+}
+
+// cosas del historial (pantalla principal)
+Card HistorialCard(String tipo) {
+  Color color;
+  if (tipo == "Egreso")
+    color = Colors.red;
+  else
+    color = Colors.green;
+
+  return Card(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    margin: EdgeInsets.all(15),
+    color: color,
+    child: Padding(
+      padding: EdgeInsets.all(16.0),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text("$tipo:",
+                textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
+            Text("Fecha",
+                textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
+            Text("Cantidad",
+                textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
+            Text("Tipo",
+                textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
+          ]),
     ),
   );
 }
