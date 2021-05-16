@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'Configuracion.dart';
+import 'Gastos.dart';
+import 'RegistroUsuario.dart';
+import 'Presupuesto.dart';
+import 'RegistroIngrYEgre.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,10 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        canvasColor: Color.fromRGBO(156, 204, 100, 1),
         brightness: Brightness.light,
-        primaryColor: Colors.lightBlue[800],
-        accentColor: Colors.lightBlue[800],
-        //primaryColor: Color.fromRGBO(43, 147, 72, 0),
+        primaryColor: Color.fromRGBO(0, 200, 83, 1),
+        accentColor: Color.fromRGBO(255, 241, 118, 1),
         fontFamily: 'Georgia',
         textTheme: TextTheme(
           headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
@@ -108,56 +113,64 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Menu'),
+              child: Text('Listado'),
               decoration: BoxDecoration(
-                color: Colors.green[800],
+                color: Color.fromRGBO(255, 255, 168, 1),
               ),
             ),
+            Ink(
+                color: Color.fromRGBO(0, 200, 83, 1),
+                child: ListTile(
+                  title: Text('°Ingresos y egresos'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegIngYEgrePantalla()),
+                    );
+                  },
+                )),
+            Ink(
+                color: Color.fromRGBO(0, 200, 83, 1),
+                child: ListTile(
+                  title: Text('°Presupuesto'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PresupuestosPantalla()),
+                    );
+                  },
+                )),
+            Ink(
+                color: Color.fromRGBO(0, 200, 83, 1),
+                child: ListTile(
+                  title: Text('°Gastos'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => GastosPantalla()),
+                    );
+                  },
+                )),
+            Ink(
+                color: Color.fromRGBO(0, 200, 83, 1),
+                child: ListTile(
+                  title: Text('°Configuracion del perfil'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ConfiPerfilPantalla()),
+                    );
+                  },
+                )),
             ListTile(
-              title: Text('Ingresos y egresos'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => RegIngYEgrePantalla()),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Presupuesto'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => PresupuestosPantalla()),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Gastos'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => GastosPantalla()),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Configuracion del perfil'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ConfiPerfilPantalla()),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Login'),
+              title: Text('°Login'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -174,82 +187,6 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
-
-class RegIngYEgrePantalla extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Registro de Ingresos y Egresos"),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Regresar!'),
-        ),
-      ),
-    );
-  }
-}
-
-class PresupuestosPantalla extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Presupuestos"),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Regresar!'),
-        ),
-      ),
-    );
-  }
-}
-
-class GastosPantalla extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Gastos"),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Regresar!'),
-        ),
-      ),
-    );
-  }
-}
-
-class ConfiPerfilPantalla extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Configuracion del perfil"),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Regresar!'),
-        ),
-      ),
     );
   }
 }
