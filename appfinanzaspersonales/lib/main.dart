@@ -270,22 +270,6 @@ class PantallaLogin extends StatelessWidget {
         child: Column(
           children: <Widget>[
             miCard(),
-            /*Padding(
-              padding: const EdgeInsets.only(top: 60.0),
-              child: Center(
-                child: TextField(
-                  controller: usuarioController,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 60.0),
-              child: Center(
-                child: TextField(
-                  controller: contrasenaController,
-                ),
-              ),
-            )*/
           ],
         ),
       ),
@@ -325,10 +309,16 @@ Card miCard() {
     elevation: 10,
     child: Column(
       children: <Widget>[
+        Image(
+          // Como queremos traer una imagen desde un url usamos NetworkImage
+          image: NetworkImage(
+              'https://i2.wp.com/www.silocreativo.com/wp-content/uploads/2017/09/login-wordpress.png?fit=666%2C370&quality=100&strip=all&ssl=1'),
+        ),
         Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: Center(
             child: TextField(
+              decoration: InputDecoration(hintText: 'Ingresa tu Usuario'),
               controller: usuarioController,
             ),
           ),
@@ -337,17 +327,12 @@ Card miCard() {
           padding: const EdgeInsets.only(top: 10.0),
           child: Center(
             child: TextField(
+              obscureText: true,
+              decoration: InputDecoration(hintText: 'Ingresa tu Contraseña'),
               controller: contrasenaController,
             ),
           ),
         )
-        /*ListTile(
-          contentPadding: EdgeInsets.fromLTRB(15, 10, 25, 0),
-          title: Text('Titulo'),
-          subtitle: Text(
-              'Este es el subtitulo del card. Aqui podemos colocar descripción de este card.'),
-          leading: Icon(Icons.home),
-        ),*/
       ],
     ),
   );
