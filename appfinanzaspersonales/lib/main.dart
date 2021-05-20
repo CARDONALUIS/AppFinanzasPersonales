@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        canvasColor: Color.fromRGBO(156, 204, 100, 1),
+        canvasColor: Color.fromRGBO(236, 240, 241, 1),
         brightness: Brightness.light,
-        primaryColor: Color.fromRGBO(0, 200, 83, 1),
-        accentColor: Color.fromRGBO(255, 241, 118, 1),
+        primaryColor: Color.fromRGBO(204, 83, 92, 1),
+        accentColor: Color.fromRGBO(221, 59, 71, 1),
         fontFamily: 'Georgia',
         textTheme: TextTheme(
           headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
@@ -120,16 +120,16 @@ class _MyHomePageState extends State<MyHomePage> {
               // height: 135,
               child: HistorialCard("Egreso"),
             ),
-            SizedBox(
-              width: double.infinity,
-              // height: 135,
-              child: HistorialCard("Ingreso"),
-            ),
-            SizedBox(
-              width: double.infinity,
-              // height: 135,
-              child: HistorialCard("Egreso"),
-            ),
+            // SizedBox(
+            //   width: double.infinity,
+            //   // height: 135,
+            //   child: HistorialCard("Ingreso"),
+            // ),
+            // SizedBox(
+            //   width: double.infinity,
+            //   // height: 135,
+            //   child: HistorialCard("Egreso"),
+            // ),
             // el scroll no funciona
           ],
         ),
@@ -141,11 +141,11 @@ class _MyHomePageState extends State<MyHomePage> {
             DrawerHeader(
               child: Text('Listado'),
               decoration: BoxDecoration(
-                color: Color.fromRGBO(156, 204, 100, 1),
+                color: Color.fromRGBO(204, 83, 92, 1),
               ),
             ),
             Ink(
-                color: Color.fromRGBO(0, 200, 83, 1),
+                color: Color.fromRGBO(221, 59, 71, 1),
                 child: ListTile(
                   title: Text('       °Ingresos y egresos'),
                   onTap: () {
@@ -158,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 )),
             Ink(
-                color: Color.fromRGBO(0, 200, 83, 1),
+                color: Color.fromRGBO(221, 59, 71, 1),
                 child: ListTile(
                   title: Text('       °Presupuesto'),
                   onTap: () {
@@ -171,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 )),
             Ink(
-                color: Color.fromRGBO(0, 200, 83, 1),
+                color: Color.fromRGBO(221, 59, 71, 1),
                 child: ListTile(
                   title: Text('       °Gastos'),
                   onTap: () {
@@ -183,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 )),
             Ink(
-                color: Color.fromRGBO(0, 200, 83, 1),
+                color: Color.fromRGBO(221, 59, 71, 1),
                 child: ListTile(
                   title: Text('       °Configuracion del perfil'),
                   onTap: () {
@@ -273,7 +273,7 @@ Card loginCard() {
               'https://i2.wp.com/www.silocreativo.com/wp-content/uploads/2017/09/login-wordpress.png?fit=666%2C370&quality=100&strip=all&ssl=1'),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 10.0),
+          padding: const EdgeInsets.only(bottom: 20.0, top: 10.0, left: 10.0),
           child: Center(
             child: TextField(
               decoration: InputDecoration(hintText: 'Ingresa tu Usuario'),
@@ -282,7 +282,7 @@ Card loginCard() {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 10.0),
+          padding: const EdgeInsets.only(bottom: 20.0, top: 10.0, left: 10.0),
           child: Center(
             child: TextField(
               obscureText: true,
