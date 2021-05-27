@@ -8,13 +8,20 @@ class PresupuestosPantalla extends StatelessWidget {
         title: Text("Presupuestos"),
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Regresar!'),
+        child: Container(
+          height: 250.0,
+          width: 290.0,
+          color: Colors.red[200],
+          margin: EdgeInsets.all(15),
+          child: Align(
+            alignment: Alignment.topRight,
+          ),
         ),
       ),
+
     );
+
   }
 }
+
+
