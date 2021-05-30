@@ -10,7 +10,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -186,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Ink(
                 color: Color.fromRGBO(221, 59, 71, 1),
                 child: ListTile(
-                  title: Text('       °Configuracion del perfil'),
+                  title: Text('       °Configuracion de aplicacion'),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
