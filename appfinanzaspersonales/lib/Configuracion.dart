@@ -31,7 +31,7 @@ class ConfiPerfilPantalla extends StatelessWidget {
           children: <Widget>[
             SizedBox(height: 50),
             Text(
-              'Cambiar moneada',
+              'Cambiar moneda',
               textAlign: TextAlign.left,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
