@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class PresupuestosPantalla extends StatelessWidget {
@@ -7,21 +9,52 @@ class PresupuestosPantalla extends StatelessWidget {
       appBar: AppBar(
         title: Text("Presupuestos"),
       ),
-      body: Center(
-        child: Container(
-          height: 250.0,
-          width: 290.0,
-          color: Colors.red[200],
-          margin: EdgeInsets.all(15),
-          child: Align(
-            alignment: Alignment.topRight,
+      body: Container(
+        decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                width: double.infinity,
+                child: CreaCard("Ingresos netos: \$", "10,000"),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: CreaCard("Egresos: \$", "8,000"),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: CreaCard("Presupuesto: \$", "2,000"),
+              ),
+            ],
           ),
         ),
       ),
-
     );
-
   }
 }
 
-
+Card CreaCard(String texto, String valor) {
+  return Card(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    margin: EdgeInsets.all(15),
+    child: Padding(
+      padding: EdgeInsets.all(16.0),
+      child: Row(children: <Widget>[
+        Container(
+          // decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+          // alignment: Alignment.center,
+          child: Text(texto,
+              textAlign: TextAlign.left, style: TextStyle(fontSize: 25)),
+        ),
+        Container(
+          // decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+          // alignment: Alignment.center,
+          child: Text(valor,
+              textAlign: TextAlign.left, style: TextStyle(fontSize: 25)),
+        ),
+      ]),
+    ),
+  );
+}
