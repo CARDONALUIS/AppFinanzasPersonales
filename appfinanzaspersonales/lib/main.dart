@@ -300,9 +300,9 @@ Card loginCard() {
 Card HistorialCard(String tipo) {
   Color color;
   if (tipo == "Egreso")
-    color = Colors.red;
+    color = Color.fromRGBO(221, 134, 140, 1);
   else
-    color = Colors.green;
+    color = Color.fromRGBO(168, 243, 135, 1);
 
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
