@@ -228,6 +228,20 @@ class PantallaLogin extends StatelessWidget {
         child: Column(
           children: <Widget>[
             loginCard(),
+            FlatButton(
+                child: Text(
+                  'Registrar',
+                  style: TextStyle(fontSize: 20.0),
+                ),
+                color: Color.fromRGBO(204, 83, 92, 1),
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RegUsuarioPantalla()),
+                  );
+                }),
           ],
         ),
       ),
@@ -290,7 +304,7 @@ Card loginCard() {
               controller: contrasenaController,
             ),
           ),
-        )
+        ),
       ],
     ),
   );
