@@ -130,7 +130,6 @@ class MyHomePage extends StatelessWidget {
                               final snackBar = SnackBar(
                                 content: Text('Contraseña correcta'),
                               );
-
                               // Find the ScaffoldMessenger in the widget tree
                               // and use it to show a SnackBar.
                               ScaffoldMessenger.of(context)
@@ -149,7 +148,6 @@ class MyHomePage extends StatelessWidget {
                                   onPressed: () {},
                                 ),
                               );
-
                               // Find the ScaffoldMessenger in the widget tree
                               // and use it to show a SnackBar.
                               ScaffoldMessenger.of(context)
