@@ -222,16 +222,25 @@ class PantallaLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text(" "),
       ),
       body: Center(
         child: Column(
           children: <Widget>[
             loginCard(),
+            Text(
+              '¿Aún no tienes cuenta?, registrate aquí',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 15.0,
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(204, 83, 92, 1),
+              ),
+            ),
             FlatButton(
                 child: Text(
-                  'Registrar',
-                  style: TextStyle(fontSize: 20.0),
+                  '                    Registrar usuario                    ',
+                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
                 ),
                 color: Color.fromRGBO(204, 83, 92, 1),
                 textColor: Colors.white,
@@ -276,33 +285,37 @@ class PantallaLogin extends StatelessWidget {
 
 Card loginCard() {
   return Card(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-    margin: EdgeInsets.all(15),
-    elevation: 10,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+    margin: EdgeInsets.all(17),
+    elevation: 12,
     child: Column(
       children: <Widget>[
         Image(
+          height: 150,
           // Como queremos traer una imagen desde un url usamos NetworkImage
           image: NetworkImage(
-              'https://i2.wp.com/www.silocreativo.com/wp-content/uploads/2017/09/login-wordpress.png?fit=666%2C370&quality=100&strip=all&ssl=1'),
+              'https://images.vexels.com/media/users/3/135251/isolated/preview/ab893f9074d536e3e940d61f0fc62b39-los-usuarios-firman-en-rojo-by-vexels.png'),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 20.0, top: 10.0, left: 10.0),
-          child: Center(
-            child: TextField(
-              decoration: InputDecoration(hintText: 'Ingresa tu Usuario'),
-              controller: usuarioController,
-            ),
+          padding: const EdgeInsets.only(
+              left: 15.0, right: 15.0, top: 15, bottom: 0),
+          child: TextField(
+            decoration: InputDecoration(
+                fillColor: Color.fromRGBO(204, 83, 92, 1),
+                border: OutlineInputBorder(),
+                labelText: 'Usuario:',
+                hintText: 'Nombre de usuario'),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 20.0, top: 10.0, left: 10.0),
-          child: Center(
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(hintText: 'Ingresa tu Contraseña'),
-              controller: contrasenaController,
-            ),
+          padding: const EdgeInsets.only(
+              left: 15.0, right: 15.0, top: 15, bottom: 15),
+          child: TextField(
+            decoration: InputDecoration(
+                fillColor: Color.fromRGBO(204, 83, 92, 1),
+                border: OutlineInputBorder(),
+                labelText: 'Contraseña:',
+                hintText: 'Al menos 6 caracteres'),
           ),
         ),
       ],
@@ -314,9 +327,9 @@ Card loginCard() {
 Card HistorialCard(String tipo) {
   Color color;
   if (tipo == "Egreso")
-    color = Colors.red;
+    color = Color.fromRGBO(221, 134, 140, 1);
   else
-    color = Colors.green;
+    color = Color.fromRGBO(168, 243, 135, 1);
 
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
