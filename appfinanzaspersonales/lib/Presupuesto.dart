@@ -11,7 +11,7 @@ class PresupuestosPantalla extends StatelessWidget {
         decoration: BoxDecoration(border: Border.all(color: Colors.red)),
         child: Center(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(
                 width: double.infinity,

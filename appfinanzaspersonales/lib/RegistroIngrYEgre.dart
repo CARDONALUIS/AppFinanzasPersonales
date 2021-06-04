@@ -1,6 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-
 
 class RegIngYEgrePantalla extends StatelessWidget {
   const RegIngYEgrePantalla({Key key}) : super(key: key);
@@ -16,38 +15,33 @@ class RegIngYEgrePantalla extends StatelessWidget {
       body: Container(
         child: Column(
           children: [
-            SizedBox(
-              width: double.infinity,
-              height: 180.0,
-              child: Card(
-                color: Color.fromRGBO(152, 193, 217,1),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                margin: EdgeInsets.all(15),
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                child: MyStatefulWidget(),
-                )
-              )
-              // height: 135,
-            ),
-            textCard(),
-            textCard2(),
-            textCard3(),
-        FlatButton(
-          child: Text('Guardar', style: TextStyle(fontSize: 20.0),),
-          color: Color.fromRGBO(204, 83, 92, 1),
-          textColor: Colors.white,
-          onPressed: () {}
-        ),
-          FlatButton(
-            child: Text('Regresar', style: TextStyle(fontSize: 20.0),),
-            color: Color.fromRGBO(204, 83, 92, 1),
-              textColor: Colors.white,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
+                SizedBox(
+                    width: 300,
+                    height: 190.0,
+                    child: Card(
+                        color: Color.fromRGBO(234, 190, 195,1),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        margin: EdgeInsets.all(10),
+                        child: Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child: MyStatefulWidget(),
+                        )
+                    )
+                  // height: 135,
+                ),
+                Text('Categoria / Tipo', style: TextStyle(fontSize: 20.0),),
+                textCard(),
+                Text('Fecha', style: TextStyle(fontSize: 20.0),),
+                textCard2(),
+                Text('Descripcion', style: TextStyle(fontSize: 20.0),),
+                textCard3(),
+                FlatButton(
+                    child: Text('Guardar', style: TextStyle(fontSize: 20.0),),
+                    color: Color.fromRGBO(204, 83, 92, 1),
+                    textColor: Colors.white,
+                    onPressed: () {}
+                ),
+              ],
         ),
       ),
     );
@@ -101,37 +95,47 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
 Card textCard() {
   return Card(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-    margin: EdgeInsets.all(15),
-    elevation: 10,
-    child: Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(bottom: 20.0, top: 10.0, left: 10.0),
-          child: Center(
-            child: TextField(
-              decoration: InputDecoration(hintText: 'Categoria / Tipo'),
-              //controller: usuarioController,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      margin: EdgeInsets.all(20),
+      elevation: 10,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0, top: 10.0, left: 10.0, right: 10.0),
+            child: Center(
+              child: TextField(
+                obscureText: false,
+                decoration: InputDecoration(
+                   contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 1.0),
+                 border:
+                 OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+               ),
+                //controller: usuarioController,
+              ),
             ),
-          ),
-        ),
-      ],
-    ),
+        ],
+      ),
   );
 }
 
 Card textCard2() {
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-    margin: EdgeInsets.all(15),
+    margin: EdgeInsets.all(20),
     elevation: 10,
     child: Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(bottom: 20.0, top: 10.0, left: 10.0),
+          padding: const EdgeInsets.only(bottom: 10.0, top: 10.0, left: 10.0, right: 10.0),
           child: Center(
             child: TextField(
-              decoration: InputDecoration(hintText: 'Fecha'),
+              obscureText: false,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 1.0),
+                  border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+              //decoration: InputDecoration(hintText: 'Fecha'),
               //controller: usuarioController,
             ),
           ),
@@ -144,15 +148,20 @@ Card textCard2() {
 Card textCard3() {
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-    margin: EdgeInsets.all(15),
+    margin: EdgeInsets.all(20),
     elevation: 10,
     child: Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(bottom: 20.0, top: 10.0, left: 10.0),
+          padding: const EdgeInsets.only(bottom: 10.0, top: 10.0, left: 10.0, right: 10.0),
           child: Center(
             child: TextField(
-              decoration: InputDecoration(hintText: 'Detalle'),
+              obscureText: false,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 1.0),
+                  border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+              //decoration: InputDecoration(hintText: 'Detalle'),
               //controller: usuarioController,
             ),
           ),
