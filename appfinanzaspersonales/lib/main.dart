@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import 'principal.dart';
 import 'RegistroUsuario.dart';
@@ -39,146 +40,194 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top: 30.0),
-        decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(top: 75.0),
-                child: Column(
+      margin: EdgeInsets.only(top: 20.0),
+      child: Center(
+        child: ListView(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                loginCard(),
+                Text(
+                  '¿Aún no tienes cuenta?, registrate aquí',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(204, 83, 92, 1),
+                  ),
+                ),
+                FlatButton(
+                    child: Text(
+                      '                    Registrar usuario                    ',
+                      style: TextStyle(
+                          fontSize: 15.0, fontWeight: FontWeight.bold),
+                    ),
+                    color: Color.fromRGBO(204, 83, 92, 1),
+                    textColor: Colors.white,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegUsuarioPantalla()),
+                      );
+                    }),
+                SizedBox(height: 10),
+                FlatButton(
+                  child: Text(
+                    '                             Ingresa                             ',
+                    style:
+                        TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+                  ),
+                  color: Color.fromRGBO(204, 83, 92, 1),
+                  textColor: Colors.white,
+                  onPressed: () {
+                    if (usuarioController.text == "admin" &&
+                        contrasenaController.text == "admin") {
+                      final snackBar = SnackBar(
+                        content: Text('Contraseña correcta'),
+                      );
+                      // Find the ScaffoldMessenger in the widget tree
+                      // and use it to show a SnackBar.
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => homePrincipal()),
+                      );
+                    } else {
+                      final snackBar = SnackBar(
+                        content: Text('Contraseña incorrecta'),
+                        action: SnackBarAction(
+                          label: 'Deshacer',
+                          onPressed: () {},
+                        ),
+                      );
+                      // Find the ScaffoldMessenger in the widget tree
+                      // and use it to show a SnackBar.
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Column(
                   children: <Widget>[
-                    Image(
-                        // Como queremos traer una imagen desde un url usamos NetworkImage
-                        image: NetworkImage(
-                            'https://i2.wp.com/www.silocreativo.com/wp-content/uploads/2017/09/login-wordpress.png?fit=666%2C370&quality=100&strip=all&ssl=1'),
-                        height: 150,
-                        fit: BoxFit.fill),
+                    CarouselSlider(items: <Widget>[
+                      Container(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              height: 200,
+                              width: 250,
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+                                    Image.asset(
+                                      "assets/car1.jpg",
+                                      height: 200,
+                                      width: 250,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              height: 200,
+                              width: 250,
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+                                    Image.asset(
+                                      "assets/car2.jpg",
+                                      height: 200,
+                                      width: 250,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              height: 200,
+                              width: 250,
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+                                    Image.asset(
+                                      "assets/car3.jpg",
+                                      height: 200,
+                                      width: 250,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ], options: CarouselOptions(autoPlay: true))
                   ],
                 ),
-              ),
-              Container(
-                  margin: EdgeInsets.only(top: 50.0),
-                  width: 250,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Usuario",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              color: Color.fromRGBO(204, 83, 92, 1),
-                              fontSize: 12),
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                            suffixIcon: Icon(
-                              Icons.cancel,
-                              color: Colors.grey,
-                              size: 30.0,
-                            ),
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Color.fromRGBO(204, 83, 92, 1),
-                                  width: 2.0),
-                            ),
-                          ),
-                          controller: usuarioController,
-                        ),
-                      ])),
-              Container(
-                  margin: EdgeInsets.only(top: 30.0),
-                  width: 250,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Contraseña",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              color: Colors.red.shade400, fontSize: 12),
-                        ),
-                        TextField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            suffixIcon: Icon(
-                              Icons.cancel,
-                              color: Colors.grey,
-                              size: 30.0,
-                            ),
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Color.fromRGBO(204, 83, 92, 1),
-                                  width: 2.0),
-                            ),
-                          ),
-                          controller: contrasenaController,
-                        ),
-                      ])),
-              Container(
-                margin: EdgeInsets.only(top: 60.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Spacer(flex: 10),
-                      SizedBox(
-                        width: 80,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (usuarioController.text == "admin" &&
-                                contrasenaController.text == "admin") {
-                              final snackBar = SnackBar(
-                                content: Text('Contraseña correcta'),
-                              );
-                              // Find the ScaffoldMessenger in the widget tree
-                              // and use it to show a SnackBar.
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                              Navigator.pop(context);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => homePrincipal()),
-                              );
-                            } else {
-                              final snackBar = SnackBar(
-                                content: Text('Contraseña incorrecta'),
-                                action: SnackBarAction(
-                                  label: 'Deshacer',
-                                  onPressed: () {},
-                                ),
-                              );
-                              // Find the ScaffoldMessenger in the widget tree
-                              // and use it to show a SnackBar.
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            }
-                          },
-                          child: Text('Login'),
-                        ),
-                      ),
-                      Spacer(flex: 5),
-                      SizedBox(
-                        width: 85,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            ////
-                            ///
-                            Navigator.pop(context);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegUsuarioPantalla()),
-                            );
-                          },
-                          child: Text('Sign In'),
-                        ),
-                      ),
-                      Spacer(flex: 10),
-                    ]),
-              ),
-            ],
-          ),
-        ));
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
+}
+
+Card loginCard() {
+  return Card(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+    margin: EdgeInsets.all(17),
+    elevation: 12,
+    child: Column(
+      children: <Widget>[
+        Image.asset(
+          "assets/login.png",
+          height: 150,
+          width: 150,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+              left: 15.0, right: 15.0, top: 15, bottom: 0),
+          child: TextField(
+            decoration: InputDecoration(
+                fillColor: Color.fromRGBO(204, 83, 92, 1),
+                border: OutlineInputBorder(),
+                labelText: 'Usuario:',
+                hintText: 'Nombre de usuario'),
+            controller: usuarioController,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+              left: 15.0, right: 15.0, top: 15, bottom: 15),
+          child: TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+                fillColor: Color.fromRGBO(204, 83, 92, 1),
+                border: OutlineInputBorder(),
+                labelText: 'Contraseña:',
+                hintText: 'Al menos 6 caracteres'),
+            controller: contrasenaController,
+          ),
+        ),
+      ],
+    ),
+  );
 }

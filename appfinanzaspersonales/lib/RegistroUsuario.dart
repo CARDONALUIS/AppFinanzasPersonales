@@ -33,11 +33,16 @@ Card registroCard() {
     elevation: 12,
     child: Column(
       children: <Widget>[
-        Image(
+        // Image(
+        //   height: 150,
+        //   // Como queremos traer una imagen desde un url usamos NetworkImage
+        //   image: NetworkImage(
+        //       'https://images.vexels.com/media/users/3/135251/isolated/preview/ab893f9074d536e3e940d61f0fc62b39-los-usuarios-firman-en-rojo-by-vexels.png'),
+        // ),
+        Image.asset(
+          "assets/login.png",
           height: 150,
-          // Como queremos traer una imagen desde un url usamos NetworkImage
-          image: NetworkImage(
-              'https://images.vexels.com/media/users/3/135251/isolated/preview/ab893f9074d536e3e940d61f0fc62b39-los-usuarios-firman-en-rojo-by-vexels.png'),
+          width: 150,
         ),
         Padding(
           padding: const EdgeInsets.only(
