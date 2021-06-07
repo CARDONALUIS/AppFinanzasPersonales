@@ -4,6 +4,16 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'principal.dart';
 import 'RegistroUsuario.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+
+Future firebaseiniciacion() async {
+  FirebaseApp initialization = await Firebase.initializeApp();
+  return initialization;
+}
+
 void main() {
   runApp(MyApp());
 }
@@ -26,8 +36,19 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
       ),
-      home: Scaffold(
+      /*home: Scaffold(
         body: MyHomePage(),
+      ),*/
+      home: FutureBuilder(
+        future: firebaseiniciacion(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return MyHomePage();
+            //return Login();
+          } else {
+            return CircularProgressIndicator();
+          }
+        },
       ),
     );
   }
@@ -37,9 +58,40 @@ final usuarioController = TextEditingController();
 final contrasenaController = TextEditingController();
 
 class MyHomePage extends StatelessWidget {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  CollectionReference coleccion =
+      FirebaseFirestore.instance.collection("coleccion");
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return /*Scaffold(
+      appBar: AppBar(
+        title: Text("Titulo"),
+      ),      
+      body: 
+      Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text("El siguiente es un texto que viene de firesbase"),
+            FutureBuilder(
+                future: coleccion.doc('iddocumento').get(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    Map<String, dynamic> data = snapshot.data.data();
+                    print(data);
+                    return Text('Campo: ${data['campo']}');
+                  } else {
+                    return CircularProgressIndicator();
+                  }
+                })
+          ],
+        ),
+      ),
+    );*/
+        Scaffold(
+            body: Container(
       margin: EdgeInsets.only(top: 20.0),
       child: Center(
         child: ListView(
@@ -47,31 +99,6 @@ class MyHomePage extends StatelessWidget {
             Column(
               children: <Widget>[
                 loginCard(),
-                Text(
-                  '¿Aún no tienes cuenta?, registrate aquí',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(204, 83, 92, 1),
-                  ),
-                ),
-                FlatButton(
-                    child: Text(
-                      '                    Registrar usuario                    ',
-                      style: TextStyle(
-                          fontSize: 15.0, fontWeight: FontWeight.bold),
-                    ),
-                    color: Color.fromRGBO(204, 83, 92, 1),
-                    textColor: Colors.white,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RegUsuarioPantalla()),
-                      );
-                    }),
-                SizedBox(height: 10),
                 FlatButton(
                   child: Text(
                     '                             Ingresa                             ',
@@ -80,6 +107,8 @@ class MyHomePage extends StatelessWidget {
                   ),
                   color: Color.fromRGBO(204, 83, 92, 1),
                   textColor: Colors.white,
+                  onPressed: () async {
+                    /*
                   onPressed: () {
                     final snackBar = SnackBar(
                       content: Text('Contraseña correcta'),
@@ -92,7 +121,6 @@ class MyHomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(builder: (context) => homePrincipal()),
                     );
-
                     if (usuarioController.text == "admin" &&
                         contrasenaController.text == "admin") {
                       final snackBar = SnackBar(
@@ -118,9 +146,65 @@ class MyHomePage extends StatelessWidget {
                       // Find the ScaffoldMessenger in the widget tree
                       // and use it to show a SnackBar.
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }*/
+                    try {
+                      final user = await auth.signInWithEmailAndPassword(
+                          email: usuarioController.text,
+                          password: contrasenaController.text);
+
+                      if (user != null) {
+                        //final snackBar = SnackBar(
+                        //  content: Text('Contraseña correcta'),
+                        //);
+                        // Find the ScaffoldMessenger in the widget tree
+                        // and use it to show a SnackBar.
+                        //ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        //Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => homePrincipal()),
+                        );
+                      }
+                    } catch (e) {
+                      final snackBar = SnackBar(
+                        content: Text('Contraseña incorrecta'),
+                        action: SnackBarAction(
+                          label: 'Deshacer',
+                          onPressed: () {},
+                        ),
+                      );
+                      // Find the ScaffoldMessenger in the widget tree
+                      // and use it to show a SnackBar.
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
                   },
                 ),
+                SizedBox(height: 10),
+                Text(
+                  '¿Aún no tienes cuenta?, registrate aquí',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(204, 83, 92, 1),
+                  ),
+                ),
+                FlatButton(
+                    child: Text(
+                      '                    Registrar usuario                    ',
+                      style: TextStyle(
+                          fontSize: 15.0, fontWeight: FontWeight.bold),
+                    ),
+                    color: Color.fromRGBO(204, 83, 92, 1),
+                    textColor: Colors.white,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegUsuarioPantalla()),
+                      );
+                    }),
                 SizedBox(
                   height: 20,
                 ),
@@ -198,7 +282,7 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }
 
