@@ -15,16 +15,16 @@ class PresupuestosPantalla extends StatelessWidget {
             children: <Widget>[
               SizedBox(
                 width: double.infinity,
-                child: CreaCard("Ingresos netos: \$", "10,000"),
+                child: CreaCard("Ingresos netos: ", "\$10,000"),
               ),
               SizedBox(
                 width: double.infinity,
-                child: CreaCard("Egresos: \$", "8,000"),
+                child: CreaCard("Egresos: ", "\$8,000"),
               ),
               SizedBox(
                 width: double.infinity,
-                child: CreaCard("Presupuesto: \$", "2,000"),
-              ),
+                child: CreaCard("Presupuesto: ", "\$2,000"),
+              )
             ],
           ),
         ),
@@ -37,22 +37,20 @@ Card CreaCard(String texto, String valor) {
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     margin: EdgeInsets.all(15),
-    child: Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Row(children: <Widget>[
-        Container(
-          // decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-          // alignment: Alignment.center,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.all(16.0),
           child: Text(texto,
               textAlign: TextAlign.left, style: TextStyle(fontSize: 25)),
         ),
-        Container(
-          // decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-          // alignment: Alignment.center,
+        Padding(
+          padding: EdgeInsets.all(16.0),
           child: Text(valor,
               textAlign: TextAlign.left, style: TextStyle(fontSize: 25)),
-        ),
-      ]),
+        )
+      ],
     ),
   );
 }

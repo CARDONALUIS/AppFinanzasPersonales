@@ -109,6 +109,18 @@ class MyHomePage extends StatelessWidget {
                   textColor: Colors.white,
                   onPressed: () async {
                     /*
+                  onPressed: () {
+                    final snackBar = SnackBar(
+                      content: Text('Contraseña correcta'),
+                    );
+                    // Find the ScaffoldMessenger in the widget tree
+                    // and use it to show a SnackBar.
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => homePrincipal()),
+                    );
                     if (usuarioController.text == "admin" &&
                         contrasenaController.text == "admin") {
                       final snackBar = SnackBar(
