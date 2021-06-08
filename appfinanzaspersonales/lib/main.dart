@@ -152,24 +152,11 @@ class MyHomePage extends StatelessWidget {
                           email: usuarioController.text,
                           password: contrasenaController.text);
 
-                      var usrUid = await auth.currentUser.uid;
-                      print("HOLAAAAAAAAA");
-                      print(usrUid);
-                      
                       if (user != null) {
-                        final snackBar = SnackBar(
-                          content: Text(usrUid),
-                        );
-                        // Find the ScaffoldMessenger in the widget tree
-                        // and use it to show a SnackBar.
-                        //ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        //Navigator.pop(context);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => homePrincipal(
-                                    uid: usrUid,
-                                  )),
+                              builder: (context) => homePrincipal(auth)),
                         );
                       }
                     } catch (e) {
