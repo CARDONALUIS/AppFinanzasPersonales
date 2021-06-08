@@ -8,7 +8,7 @@ class PresupuestosPantalla extends StatelessWidget {
         title: Text("Presupuestos"),
       ),
       body: Container(
-        decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+        // decoration: BoxDecoration(border: Border.all(color: Colors.red)),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -40,15 +40,19 @@ Card CreaCard(String texto, String valor) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(texto,
-              textAlign: TextAlign.left, style: TextStyle(fontSize: 25)),
+        Container(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(texto,
+                textAlign: TextAlign.left, style: TextStyle(fontSize: 25)),
+          ),
         ),
-        Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(valor,
-              textAlign: TextAlign.left, style: TextStyle(fontSize: 25)),
+        Container(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(valor,
+                textAlign: TextAlign.left, style: TextStyle(fontSize: 25)),
+          ),
         )
       ],
     ),
