@@ -5,8 +5,14 @@ import 'Presupuesto.dart';
 import 'RegistroIngrYEgre.dart';
 
 class homePrincipal extends StatelessWidget {
+  final String uid;
+
+  const homePrincipal({Key key, this.uid}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    print('HOLAAAAAAAAAAA');
+    print(uid);
     return Scaffold(
       appBar: AppBar(
         title: Text("Historial"),
@@ -81,7 +87,9 @@ class homePrincipal extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => RegIngYEgrePantalla()),
+                      builder: (context) => RegIngYEgrePantalla(
+                            uid: this.uid,
+                          )),
                 );
               },
             )),

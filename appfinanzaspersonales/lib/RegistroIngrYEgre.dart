@@ -2,12 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RegIngYEgrePantalla extends StatelessWidget {
-  const RegIngYEgrePantalla({Key key}) : super(key: key);
+  final String uid;
 
-  static const String _title = 'Registro de Ingresos y Egresos';
+  RegIngYEgrePantalla({Key key, this.uid}) : super(key: key);
+
+  final controladorTipo = TextEditingController();
+  final controladorFecha = TextEditingController();
+  final controladorCantidad = TextEditingController();
   @override
   Widget build(BuildContext context) {
-
+    print('HOLAAAAAAAAAAA');
+    print(uid);
     return Scaffold(
       appBar: AppBar(
         title: Text("Registro de Ingresos y Egresos"),
@@ -15,39 +20,65 @@ class RegIngYEgrePantalla extends StatelessWidget {
       body: Container(
         child: Column(
           children: [
-                SizedBox(
-                    width: 300,
-                    height: 190.0,
-                    child: Card(
-                        color: Color.fromRGBO(234, 190, 195,1),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                        margin: EdgeInsets.all(10),
-                        child: Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: MyStatefulWidget(),
-                        )
-                    )
-                  // height: 135,
+            SizedBox(
+                width: 300,
+                height: 190.0,
+                child: Card(
+                    color: Color.fromRGBO(234, 190, 195, 1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    margin: EdgeInsets.all(10),
+                    child: Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: MyStatefulWidget(),
+                    ))
+                // height: 135,
                 ),
-                Text('Categoria / Tipo', style: TextStyle(fontSize: 20.0),),
-                textCard(),
-                Text('Fecha', style: TextStyle(fontSize: 20.0),),
-                textCard2(),
-                Text('Descripcion', style: TextStyle(fontSize: 20.0),),
-                textCard3(),
-                FlatButton(
-                    child: Text('Guardar', style: TextStyle(fontSize: 20.0),),
-                    color: Color.fromRGBO(204, 83, 92, 1),
-                    textColor: Colors.white,
-                    onPressed: () {}
-                ),
-              ],
+            Text(
+              'Categoria / Tipo',
+              style: TextStyle(fontSize: 20.0),
+            ),
+            textCardTipo(controladorTipo),
+            Text(
+              'Fecha',
+              style: TextStyle(fontSize: 20.0),
+            ),
+            textCardFecha(controladorFecha, context),
+            Text(
+              'Cantidad',
+              style: TextStyle(fontSize: 20.0),
+            ),
+            textCard3(controladorCantidad),
+            FlatButton(
+              child: Text(
+                'Guardar',
+                style: TextStyle(fontSize: 20.0),
+              ),
+              color: Color.fromRGBO(204, 83, 92, 1),
+              textColor: Colors.white,
+              onPressed: () async {
+                // var date = await showDatePicker(
+                //     context: context,
+                //     initialDate: DateTime.now(),
+                //     firstDate: DateTime(1900),
+                //     lastDate: DateTime(2100));
+                // controladorFecha.text = date.toString().substring(0, 10);
+                // obtenemos los datos ingresados por el usuario
+                print(controladorCantidad.text +
+                    ' ' +
+                    controladorFecha.text +
+                    ' ' +
+                    controladorTipo.text);
+              },
+            ),
+          ],
         ),
       ),
     );
   }
 }
-enum SingingCharacter {ingreso, egreso }
+
+enum SingingCharacter { ingreso, egreso }
 
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key key}) : super(key: key);
@@ -92,51 +123,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   }
 }
 
-
-Card textCard() {
-  return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      margin: EdgeInsets.all(20),
-      elevation: 10,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10.0, top: 10.0, left: 10.0, right: 10.0),
-            child: Center(
-              child: TextField(
-                obscureText: false,
-                decoration: InputDecoration(
-                   contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 1.0),
-                 border:
-                 OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-               ),
-                //controller: usuarioController,
-              ),
-            ),
-        ],
-      ),
-  );
-}
-
-Card textCard2() {
+Card textCardTipo(TextEditingController controller) {
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     margin: EdgeInsets.all(20),
     elevation: 10,
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(bottom: 10.0, top: 10.0, left: 10.0, right: 10.0),
+          padding: const EdgeInsets.only(
+              bottom: 10.0, top: 10.0, left: 10.0, right: 10.0),
           child: Center(
             child: TextField(
+              controller: controller,
               obscureText: false,
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 1.0),
-                  border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-              //decoration: InputDecoration(hintText: 'Fecha'),
-              //controller: usuarioController,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0))),
             ),
           ),
         ),
@@ -145,7 +150,7 @@ Card textCard2() {
   );
 }
 
-Card textCard3() {
+Card textCardFecha(TextEditingController controller, context) {
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     margin: EdgeInsets.all(20),
@@ -153,14 +158,52 @@ Card textCard3() {
     child: Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(bottom: 10.0, top: 10.0, left: 10.0, right: 10.0),
+          padding: const EdgeInsets.only(
+              bottom: 10.0, top: 10.0, left: 10.0, right: 10.0),
           child: Center(
             child: TextField(
+                readOnly: true,
+                controller: controller,
+                obscureText: false,
+                decoration: InputDecoration(
+                    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 1.0),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
+                //decoration: InputDecoration(hintText: 'Fecha'),
+                //controller: usuarioController,
+                onTap: () async {
+                  var date = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime(2100));
+                  controller.text = date.toString().substring(0, 10);
+                }),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Card textCard3(TextEditingController controller) {
+  return Card(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    margin: EdgeInsets.all(20),
+    elevation: 10,
+    child: Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(
+              bottom: 10.0, top: 10.0, left: 10.0, right: 10.0),
+          child: Center(
+            child: TextField(
+              controller: controller,
               obscureText: false,
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 1.0),
-                  border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0))),
               //decoration: InputDecoration(hintText: 'Detalle'),
               //controller: usuarioController,
             ),
