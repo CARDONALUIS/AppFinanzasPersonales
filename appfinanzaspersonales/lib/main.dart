@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-
-import 'principal.dart';
-import 'RegistroUsuario.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
+import 'package:flutter/material.dart';
+
+import 'principal.dart';
+import 'RegistroUsuario.dart';
 
 Future firebaseiniciacion() async {
   FirebaseApp initialization = await Firebase.initializeApp();
@@ -152,6 +152,7 @@ class MyHomePage extends StatelessWidget {
                           email: usuarioController.text,
                           password: contrasenaController.text);
 
+                      var userId = auth.currentUser.uid;
                       if (user != null) {
                         //final snackBar = SnackBar(
                         //  content: Text('Contraseña correcta'),
