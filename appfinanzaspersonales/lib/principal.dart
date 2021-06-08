@@ -3,16 +3,19 @@ import 'Configuracion.dart';
 import 'Gastos.dart';
 import 'Presupuesto.dart';
 import 'RegistroIngrYEgre.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class homePrincipal extends StatelessWidget {
-  final String uid;
+  //final String uid;
+  final FirebaseAuth userActual;
+  homePrincipal(this.userActual);
 
-  const homePrincipal({Key key, this.uid}) : super(key: key);
+  //const homePrincipal({Key key, this.uid}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print('HOLAAAAAAAAAAA');
-    print(uid);
+    //print('HOLAAAAAAAAAAA');
+    //print(uid);
     return Scaffold(
       appBar: AppBar(
         title: Text("Historial"),
@@ -67,7 +70,7 @@ class homePrincipal extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Image.asset("assets/login.png", height: 100, width: 100),
-                    Text("Nombre"),
+                    Text(userActual.currentUser.email),
                   ],
                 ),
               ),
@@ -88,7 +91,7 @@ class homePrincipal extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => RegIngYEgrePantalla(
-                            uid: this.uid,
+                            uid: userActual.currentUser.uid,
                           )),
                 );
               },
@@ -136,7 +139,7 @@ class homePrincipal extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ConfiPerfilPantalla()),
+                      builder: (context) => ConfiPerfilPantalla(userActual)),
                 );
               },
             )),
