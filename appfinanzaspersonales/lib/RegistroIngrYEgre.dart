@@ -1,3 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -57,6 +60,17 @@ class RegIngYEgrePantalla extends StatelessWidget {
               color: Color.fromRGBO(204, 83, 92, 1),
               textColor: Colors.white,
               onPressed: () async {
+                CollectionReference coleccion =
+                    FirebaseFirestore.instance.collection("movimientos");
+
+                //if (await coleccion.doc(uid).get() == null) {
+                await coleccion.doc(uid).set({
+                  'tipo': controladorTipo.text,
+                  'fecha': controladorFecha.text,
+                  'cantidad': controladorCantidad.text
+                });
+                //});
+                //}
                 // var date = await showDatePicker(
                 //     context: context,
                 //     initialDate: DateTime.now(),
