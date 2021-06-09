@@ -4,18 +4,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+int movimiento = 0;
+
 class RegIngYEgrePantalla extends StatelessWidget {
   final String uid;
-
+  CollectionReference coleccion =
+      FirebaseFirestore.instance.collection("movimientos");
   RegIngYEgrePantalla({Key key, this.uid}) : super(key: key);
-
   final controladorTipo = TextEditingController();
   final controladorFecha = TextEditingController();
   final controladorCantidad = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    print('HOLAAAAAAAAAAA');
-    print(uid);
+    movimiento = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text("Registro de Ingresos y Egresos"),
@@ -51,7 +53,7 @@ class RegIngYEgrePantalla extends StatelessWidget {
               'Cantidad',
               style: TextStyle(fontSize: 20.0),
             ),
-            textCard3(controladorCantidad),
+            textCardCantidad(controladorCantidad),
             FlatButton(
               child: Text(
                 'Guardar',
@@ -60,29 +62,13 @@ class RegIngYEgrePantalla extends StatelessWidget {
               color: Color.fromRGBO(204, 83, 92, 1),
               textColor: Colors.white,
               onPressed: () async {
-                CollectionReference coleccion =
-                    FirebaseFirestore.instance.collection("movimientos");
-
-                //if (await coleccion.doc(uid).get() == null) {
-                await coleccion.doc(uid).set({
-                  'tipo': controladorTipo.text,
-                  'fecha': controladorFecha.text,
-                  'cantidad': controladorCantidad.text
-                });
-                //});
-                //}
-                // var date = await showDatePicker(
-                //     context: context,
-                //     initialDate: DateTime.now(),
-                //     firstDate: DateTime(1900),
-                //     lastDate: DateTime(2100));
-                // controladorFecha.text = date.toString().substring(0, 10);
-                // obtenemos los datos ingresados por el usuario
-                print(controladorCantidad.text +
-                    ' ' +
-                    controladorFecha.text +
-                    ' ' +
-                    controladorTipo.text);
+                guardaMovimiento(
+                    coleccion,
+                    uid,
+                    controladorTipo.text,
+                    controladorFecha.text,
+                    controladorCantidad.text,
+                    movimiento);
               },
             ),
           ],
@@ -115,10 +101,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             groupValue: _character,
             onChanged: (SingingCharacter value) {
               setState(() {
+                print('SETSTATEIGNRESO');
+                movimiento = 0;
                 _character = value;
               });
             },
           ),
+          // onTap: () {
+          //   movimiento = 0;
+          //   print('ONTAPINGRESSO');
+          // }
         ),
         ListTile(
           title: const Text('Egreso'),
@@ -127,10 +119,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             groupValue: _character,
             onChanged: (SingingCharacter value) {
               setState(() {
+                print('SETSTATE EGRESO');
+                movimiento = 1;
                 _character = value;
               });
             },
           ),
+          // onTap: () {
+          //   movimiento = 1;
+          //   print('ONTAP EGRESO');
+          // },
         ),
       ],
     );
@@ -200,7 +198,7 @@ Card textCardFecha(TextEditingController controller, context) {
   );
 }
 
-Card textCard3(TextEditingController controller) {
+Card textCardCantidad(TextEditingController controller) {
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     margin: EdgeInsets.all(20),
@@ -212,6 +210,7 @@ Card textCard3(TextEditingController controller) {
               bottom: 10.0, top: 10.0, left: 10.0, right: 10.0),
           child: Center(
             child: TextField(
+              keyboardType: TextInputType.number,
               controller: controller,
               obscureText: false,
               decoration: InputDecoration(
@@ -226,4 +225,52 @@ Card textCard3(TextEditingController controller) {
       ],
     ),
   );
+}
+
+void guardaMovimiento(CollectionReference coleccion, String uid, String tipo,
+    String fecha, String cantidad, int tipoMovimiento) async {
+  if (uid == '' || tipo == '' || fecha == '' || cantidad == '') return;
+
+  int id = -1;
+  String movimiento = "ingresos";
+
+  if (tipoMovimiento != 0) movimiento = "egresos";
+
+  await ultimoId(coleccion).then((value) {
+    id = value;
+  });
+
+  await coleccion
+      .doc(uid)
+      .collection(movimiento)
+      .doc(id.toString())
+      .set(({'tipo': tipo, 'fecha': fecha, 'cantidad': cantidad}));
+
+  actuailzaID(coleccion);
+}
+
+Future<int> ultimoId(CollectionReference coleccion) async {
+  int id = -1;
+
+  await coleccion.doc("ids").get().then((snapshot) {
+    id = snapshot.data()['ultimoID'];
+  });
+
+  print(id);
+
+  return id;
+}
+
+void actuailzaID(CollectionReference coleccion) async {
+  int id = -1;
+
+  await ultimoId(coleccion).then((value) {
+    id = value;
+  });
+
+  print(id);
+
+  await coleccion.doc("ids").set({
+    'ultimoID': (id + 1),
+  });
 }
