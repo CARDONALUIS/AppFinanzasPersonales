@@ -184,6 +184,9 @@ class RegIngYEgrePantalla extends StatelessWidget {
   }
 }
 
+
+
+
 enum SingingCharacter { ingreso, egreso }
 
 class MyStatefulWidget extends StatefulWidget {
@@ -239,6 +242,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ],
     );
   }
+
 }
 
 Card textCardTipo(TextEditingController controller) {
@@ -380,3 +384,14 @@ void actuailzaID(CollectionReference coleccion) async {
     'ultimoID': (id + 1),
   });
 }
+
+
+Widget _buildAlertDialog() {
+  return AlertDialog(
+    title: Text('Registro Exitoso'),
+  );
+}
+
+
+
+
