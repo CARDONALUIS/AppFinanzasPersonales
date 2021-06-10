@@ -23,60 +23,88 @@ class RegIngYEgrePantalla extends StatelessWidget {
         title: Text("Registro de Ingresos y Egresos"),
       ),
       body: Container(
-        child: Column(
-          children: [
-            SizedBox(
-                width: 300,
-                height: 190.0,
-                child: Card(
-                    color: Color.fromRGBO(234, 190, 195, 1),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    margin: EdgeInsets.all(10),
-                    child: Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: MyStatefulWidget(),
-                    ))
-                // height: 135,
-                ),
-            Text(
-              'Categoria / Tipo',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            textCardTipo(controladorTipo),
-            Text(
-              'Fecha',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            textCardFecha(controladorFecha, context),
-            Text(
-              'Cantidad',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            textCardCantidad(controladorCantidad),
-            FlatButton(
-              child: Text(
-                'Guardar',
-                style: TextStyle(fontSize: 20.0),
+        child: ListView(
+            children: <Widget>[
+              Column(
+                children: [
+                  SizedBox(
+                      width: 300,
+                      height: 190.0,
+                      child: Card(
+                          color: Color.fromRGBO(234, 190, 195, 1),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          margin: EdgeInsets.all(10),
+                          child: Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: MyStatefulWidget(),
+                          ))
+                    // height: 135,
+                  ),
+                  Text(
+                    'Categoria / Tipo',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  textCardTipo(controladorTipo),
+                  Text(
+                    'Fecha',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  textCardFecha(controladorFecha, context),
+                  Text(
+                    'Cantidad',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  textCardCantidad(controladorCantidad),
+                  FlatButton(
+                    child: Text(
+                      'Guardar',
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                    color: Color.fromRGBO(204, 83, 92, 1),
+                    textColor: Colors.white,
+                    onPressed: ()
+                    async {
+                      guardaMovimiento(
+                          coleccion,
+                          uid,
+                          controladorTipo.text,
+                          controladorFecha.text,
+                          controladorCantidad.text,
+                          movimiento);
+                      return showDialog(
+                        context: context,
+                        //builder: (_) => _buildAlertDialog(),
+                          builder: (BuildContext context) => AlertDialog(
+                        title: const Text('¡Registro Exitoso!',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontFamily: 'Arial', fontSize: 20), ),
+                        content: const Text('El Registro se ha agregado correctamente',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontFamily: 'Arial', fontSize: 14),
+                          ),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK',
+                            textAlign: TextAlign.center,),
+                          ),
+                        ],
+                      ),
+                      );
+                      },
+                    ),
+                ],
               ),
-              color: Color.fromRGBO(204, 83, 92, 1),
-              textColor: Colors.white,
-              onPressed: () async {
-                guardaMovimiento(
-                    coleccion,
-                    uid,
-                    controladorTipo.text,
-                    controladorFecha.text,
-                    controladorCantidad.text,
-                    movimiento);
-              },
-            ),
-          ],
-        ),
+            ]
+        )
       ),
     );
   }
 }
+
+
+
 
 enum SingingCharacter { ingreso, egreso }
 
@@ -133,6 +161,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ],
     );
   }
+
 }
 
 Card textCardTipo(TextEditingController controller) {
@@ -274,3 +303,14 @@ void actuailzaID(CollectionReference coleccion) async {
     'ultimoID': (id + 1),
   });
 }
+
+
+Widget _buildAlertDialog() {
+  return AlertDialog(
+    title: Text('Registro Exitoso'),
+  );
+}
+
+
+
+
