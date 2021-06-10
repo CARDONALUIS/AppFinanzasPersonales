@@ -4,6 +4,7 @@ import 'Gastos.dart';
 import 'Presupuesto.dart';
 import 'RegistroIngrYEgre.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'IngresosEgresosController.dart';
 
 class homePrincipal extends StatelessWidget {
   //final String uid;
@@ -103,12 +104,40 @@ class homePrincipal extends StatelessWidget {
                 color: Color.fromRGBO(204, 83, 92, 1),
               ),
               title: Text('Presupuesto'),
-              onTap: () {
+              onTap: () async {
+                String ing, eg, pre;
+                await obtenTotalMovimientos(
+                        userActual.currentUser.uid, 'ingresos')
+                    .then((value) {
+                  if (value != null)
+                    ing = value.toString();
+                  else
+                    ing = '0';
+                });
+                await obtenTotalMovimientos(
+                        userActual.currentUser.uid, 'egresos')
+                    .then((value) {
+                  if (value != null)
+                    eg = value.toString();
+                  else
+                    eg = '0';
+                });
+
+                double p = double.parse(ing) - double.parse(eg);
+                if (p > 0) {
+                  pre = p.toString();
+                } else
+                  pre = '0';
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => PresupuestosPantalla()),
+                      builder: (context) => PresupuestosPantalla(
+                            uid: userActual.currentUser.uid,
+                            ingresos: ing,
+                            egresos: eg,
+                            presupuesto: pre,
+                          )),
                 );
               },
             )),
