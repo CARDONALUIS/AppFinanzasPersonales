@@ -91,6 +91,33 @@ class RegIngYEgrePantalla extends StatelessWidget {
                             controladorFecha.text,
                             controladorCantidad.text,
                             movimiento);
+                        return showDialog(
+                          context: context,
+                          //builder: (_) => _buildAlertDialog(),
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text(
+                              '¡Registro Exitoso!',
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(fontFamily: 'Arial', fontSize: 20),
+                            ),
+                            content: const Text(
+                              'El Registro se ha agregado correctamente',
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(fontFamily: 'Arial', fontSize: 14),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text(
+                                  'OK',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       },
                     ),
                   ],
