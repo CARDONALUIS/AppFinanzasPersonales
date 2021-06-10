@@ -17,64 +17,143 @@ class RegIngYEgrePantalla extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<int> top = <int>[];
+    List<int> bottom = <int>[0];
+    const Key centerKey = ValueKey<String>('bottom-sliver-list');
     movimiento = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text("Registro de Ingresos y Egresos"),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            SizedBox(
-                width: 300,
-                height: 190.0,
-                child: Card(
-                    color: Color.fromRGBO(234, 190, 195, 1),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    margin: EdgeInsets.all(10),
-                    child: Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: MyStatefulWidget(),
-                    ))
-                // height: 135,
-                ),
-            Text(
-              'Categoria / Tipo',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            textCardTipo(controladorTipo),
-            Text(
-              'Fecha',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            textCardFecha(controladorFecha, context),
-            Text(
-              'Cantidad',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            textCardCantidad(controladorCantidad),
-            FlatButton(
-              child: Text(
-                'Guardar',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              color: Color.fromRGBO(204, 83, 92, 1),
-              textColor: Colors.white,
-              onPressed: () async {
-                guardaMovimiento(
-                    coleccion,
-                    uid,
-                    controladorTipo.text,
-                    controladorFecha.text,
-                    controladorCantidad.text,
-                    movimiento);
+      body: CustomScrollView(
+        center: centerKey,
+        slivers: <Widget>[
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Container(
+                  alignment: Alignment.center,
+                  color: Colors.blue[200 + top[index] % 4 * 100],
+                  height: 100 + top[index] % 4 * 20.0,
+                  child: Text('Item: ${top[index]}'),
+                );
               },
+              childCount: top.length,
             ),
-          ],
-        ),
+          ),
+          SliverList(
+            key: centerKey,
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Column(
+                  children: [
+                    SizedBox(
+                        width: 300,
+                        height: 190.0,
+                        child: Card(
+                            color: Color.fromRGBO(234, 190, 195, 1),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            margin: EdgeInsets.all(10),
+                            child: Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: MyStatefulWidget(),
+                            ))
+                        // height: 135,
+                        ),
+                    Text(
+                      'Categoria / Tipo',
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                    textCardTipo(controladorTipo),
+                    Text(
+                      'Fecha',
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                    textCardFecha(controladorFecha, context),
+                    Text(
+                      'Cantidad',
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                    textCardCantidad(controladorCantidad),
+                    FlatButton(
+                      child: Text(
+                        'Guardar',
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      color: Color.fromRGBO(204, 83, 92, 1),
+                      textColor: Colors.white,
+                      onPressed: () async {
+                        guardaMovimiento(
+                            coleccion,
+                            uid,
+                            controladorTipo.text,
+                            controladorFecha.text,
+                            controladorCantidad.text,
+                            movimiento);
+                      },
+                    ),
+                  ],
+                );
+              },
+              childCount: bottom.length,
+            ),
+          ),
+        ],
       ),
     );
+    // body: Container(
+    //   child: Column(
+    //     children: [
+    //       SizedBox(
+    //           width: 300,
+    //           height: 190.0,
+    //           child: Card(
+    //               color: Color.fromRGBO(234, 190, 195, 1),
+    //               shape: RoundedRectangleBorder(
+    //                   borderRadius: BorderRadius.circular(10)),
+    //               margin: EdgeInsets.all(10),
+    //               child: Padding(
+    //                 padding: EdgeInsets.all(20.0),
+    //                 child: MyStatefulWidget(),
+    //               ))
+    //           // height: 135,
+    //           ),
+    //       Text(
+    //         'Categoria / Tipo',
+    //         style: TextStyle(fontSize: 20.0),
+    //       ),
+    //       textCardTipo(controladorTipo),
+    //       Text(
+    //         'Fecha',
+    //         style: TextStyle(fontSize: 20.0),
+    //       ),
+    //       textCardFecha(controladorFecha, context),
+    //       Text(
+    //         'Cantidad',
+    //         style: TextStyle(fontSize: 20.0),
+    //       ),
+    //       textCardCantidad(controladorCantidad),
+    //       FlatButton(
+    //         child: Text(
+    //           'Guardar',
+    //           style: TextStyle(fontSize: 20.0),
+    //         ),
+    //         color: Color.fromRGBO(204, 83, 92, 1),
+    //         textColor: Colors.white,
+    //         onPressed: () async {
+    //           guardaMovimiento(
+    //               coleccion,
+    //               uid,
+    //               controladorTipo.text,
+    //               controladorFecha.text,
+    //               controladorCantidad.text,
+    //               movimiento);
+    //         },
+    //       ),
+    //     ],
+    //   ),
+    // ),
   }
 }
 
