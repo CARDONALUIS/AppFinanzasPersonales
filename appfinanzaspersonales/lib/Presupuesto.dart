@@ -30,7 +30,9 @@ class PresupuestosPantalla extends StatelessWidget {
               ),
               SizedBox(
                 width: double.infinity,
-                child: creaCard("Presupuesto: ", presupuesto),
+                child: presupuesto.indexOf('0') == 0
+                    ? creaCard("Presupuesto: ", presupuesto)
+                    : creaCard("Limita tus gastos!", ''),
               ),
               // calculamos el presupuesto para determinar el mensaje a mostrar
               // (() {
