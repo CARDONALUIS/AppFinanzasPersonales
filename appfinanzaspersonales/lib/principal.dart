@@ -27,7 +27,12 @@ class homePrincipal extends StatelessWidget {
                 future: historiales(userActual.currentUser.uid),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    return Text('cargando');
+                    return Center(
+                        child: CircularProgressIndicator(
+                      backgroundColor: Colors.cyanAccent,
+                      valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+                      strokeWidth: 6,
+                    ));
                   }
                   if (snapshot.hasError) {
                     return Text('hubo un error!');
@@ -184,9 +189,9 @@ class homePrincipal extends StatelessWidget {
 Card HistorialCard(String tipo, String fecha, String cantidad, String tipoMov) {
   Color color;
   if (tipoMov == "Egreso")
-    color = Color.fromRGBO(221, 134, 140, 1);
+    color = Colors.red[400]; //Color.fromRGBO(221, 134, 140, 1);
   else
-    color = Color.fromRGBO(168, 243, 135, 1);
+    color = Colors.green[600]; //Color.fromRGBO(168, 243, 135, 1);
 
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
