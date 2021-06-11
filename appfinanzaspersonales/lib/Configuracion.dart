@@ -7,6 +7,7 @@ class ConfiPerfilPantalla extends StatelessWidget {
 
   //var _listaMoneda = ['Peso', 'Dolar'];
   //String _vistaMoneda = 'seleccione un tipo de moneda';
+  final usuarioController = TextEditingController();
   final contrasenaController = TextEditingController();
   final contrasena2Controller = TextEditingController();
 
@@ -32,15 +33,14 @@ class ConfiPerfilPantalla extends StatelessWidget {
                 Container(
                   width: 300,
                   child: TextField(
-                    obscureText: true,
                     decoration: InputDecoration(
-                      hintText: 'Minimo 6 caracteres',
+                      hintText: userActual.currentUser.email,
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 1.0),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0)),
                     ),
-                    controller: contrasenaController,
+                    controller: usuarioController,
                   ),
                 ),
                 SizedBox(height: 80),
@@ -110,6 +110,14 @@ class ConfiPerfilPantalla extends StatelessWidget {
                     textColor: Colors.white,
                     onPressed: () async {
                       try {
+                        if (usuarioController.text == "") {
+                          userActual.currentUser
+                              .updateEmail(userActual.currentUser.email);
+                        } else {
+                          userActual.currentUser
+                              .updateEmail(usuarioController.text);
+                        }
+
                         if (contrasena2Controller.text ==
                             contrasena2Controller.text) {
                           userActual.currentUser
