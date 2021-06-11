@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'Configuracion.dart';
-import 'Gastos.dart';
 import 'Presupuesto.dart';
 import 'RegistroIngrYEgre.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -138,21 +137,6 @@ class homePrincipal extends StatelessWidget {
             Ink(
                 child: ListTile(
               leading: Icon(
-                Icons.perm_device_info,
-                color: Color.fromRGBO(204, 83, 92, 1),
-              ),
-              title: Text('Gastos'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => GastosPantalla()),
-                );
-              },
-            )),
-            Ink(
-                child: ListTile(
-              leading: Icon(
                 Icons.settings_rounded,
                 color: Color.fromRGBO(204, 83, 92, 1),
               ),
@@ -166,7 +150,7 @@ class homePrincipal extends StatelessWidget {
                 );
               },
             )),
-            Ink(
+            /*Ink(
                 child: ListTile(
               leading: Icon(
                 Icons.add_to_home_screen,
@@ -177,7 +161,7 @@ class homePrincipal extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
               },
-            )),
+            )),*/
           ],
         ),
       ),
@@ -202,13 +186,13 @@ Card HistorialCard(String tipo, String fecha, String cantidad, String tipoMov) {
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("$tipo:",
-                textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
-            Text("$fecha",
-                textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
-            Text("$cantidad",
-                textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
             Text("$tipoMov",
+                textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
+            Text("Tipo: $tipo",
+                textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
+            Text("Fecha: $fecha",
+                textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
+            Text("Cantidad: $cantidad",
                 textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
           ]),
     ),

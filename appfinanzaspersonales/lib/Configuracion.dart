@@ -5,8 +5,8 @@ class ConfiPerfilPantalla extends StatelessWidget {
   final FirebaseAuth userActual;
   ConfiPerfilPantalla(this.userActual);
 
-  var _listaMoneda = ['Peso', 'Dolar'];
-  String _vistaMoneda = 'seleccione un tipo de moneda';
+  //var _listaMoneda = ['Peso', 'Dolar'];
+  //String _vistaMoneda = 'seleccione un tipo de moneda';
   final contrasenaController = TextEditingController();
   final contrasena2Controller = TextEditingController();
 
@@ -14,7 +14,7 @@ class ConfiPerfilPantalla extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Configuraciones"),
+        title: Text("Configuracion de usuario"),
       ),
       body: Center(
         child: ListView(
@@ -23,27 +23,27 @@ class ConfiPerfilPantalla extends StatelessWidget {
               children: <Widget>[
                 SizedBox(height: 50),
                 Text(
-                  'Cambiar moneda',
+                  'Configura tu usuario',
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 20),
                 ),
-                SizedBox(height: 5),
-                DropdownButton(
-                  items: _listaMoneda.map((String a) {
-                    return DropdownMenuItem(value: a, child: Text(a));
-                  }).toList(),
-                  onChanged: (_) {},
-                  hint: Text(_vistaMoneda),
+                SizedBox(height: 10),
+                Container(
+                  width: 300,
+                  child: TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      hintText: 'Minimo 6 caracteres',
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 1.0),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0)),
+                    ),
+                    controller: contrasenaController,
+                  ),
                 ),
                 SizedBox(height: 80),
-                Text(
-                  'Configura tu contraseña',
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                SizedBox(height: 40),
                 Container(
                   width: 300,
                   child: Row(

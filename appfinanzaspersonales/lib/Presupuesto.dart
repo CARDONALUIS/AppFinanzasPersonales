@@ -22,7 +22,7 @@ class PresupuestosPantalla extends StatelessWidget {
             children: <Widget>[
               SizedBox(
                 width: double.infinity,
-                child: creaCard("ingresos: ", ingresos),
+                child: creaCard("Ingresos: ", ingresos),
               ),
               SizedBox(
                 width: double.infinity,
