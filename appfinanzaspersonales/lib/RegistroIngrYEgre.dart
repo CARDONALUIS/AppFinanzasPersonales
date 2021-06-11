@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-int movimiento = 0;
+int movimientoCount = 0;
 
 class RegIngYEgrePantalla extends StatelessWidget {
   final String uid;
@@ -20,7 +20,7 @@ class RegIngYEgrePantalla extends StatelessWidget {
     List<int> top = <int>[];
     List<int> bottom = <int>[0];
     const Key centerKey = ValueKey<String>('bottom-sliver-list');
-    movimiento = 0;
+    movimientoCount = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text("Registro de Ingresos y Egresos"),
@@ -90,7 +90,7 @@ class RegIngYEgrePantalla extends StatelessWidget {
                             controladorTipo.text,
                             controladorFecha.text,
                             controladorCantidad.text,
-                            movimiento);
+                            movimientoCount);
                         return showDialog(
                           context: context,
                           //builder: (_) => _buildAlertDialog(),
@@ -208,7 +208,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             onChanged: (SingingCharacter value) {
               setState(() {
                 print('SETSTATEIGNRESO');
-                movimiento = 0;
+                movimientoCount = 0;
                 _character = value;
               });
             },
@@ -226,7 +226,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             onChanged: (SingingCharacter value) {
               setState(() {
                 print('SETSTATE EGRESO');
-                movimiento = 1;
+                movimientoCount = 1;
                 _character = value;
               });
             },

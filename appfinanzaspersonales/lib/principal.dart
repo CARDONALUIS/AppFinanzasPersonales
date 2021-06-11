@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'Configuracion.dart';
 import 'Gastos.dart';
@@ -15,52 +16,40 @@ class homePrincipal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //print('HOLAAAAAAAAAAA');
-    //print(uid);
     return Scaffold(
       appBar: AppBar(
         title: Text("Historial"),
       ),
-      body: Container(
-        child: ListView(
-          children: <Widget>[
-            Column(
-              // por cada ingreso e ingreso de la base de datos, crear un card
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  // height: 135,
-                  child: HistorialCard("Egreso"),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  // height: 135,
-                  child: HistorialCard("Ingreso"),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  // height: 135,
-                  child: HistorialCard("Ingreso"),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  // height: 135,
-                  child: HistorialCard("Egreso"),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  // height: 135,
-                  child: HistorialCard("Ingreso"),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  // height: 135,
-                  child: HistorialCard("Egreso"),
-                ),
-              ],
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          Flexible(
+            child: FutureBuilder(
+                future: historiales(userActual.currentUser.uid),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return Text('cargando');
+                  }
+                  if (snapshot.hasError) {
+                    return Text('hubo un error!');
+                  }
+                  List<movimiento> movimientos = snapshot.data ?? [];
+                  return ListView.builder(
+                      itemCount: movimientos.length,
+                      itemBuilder: (context, index) {
+                        // print(index.toString() +
+                        //     'AAAAAAAAAAAAAAAAAAAAAA' +
+                        //     movimientos[index].cantidad +
+                        //     ' ' +
+                        //     movimientos[index].tipo);
+                        return HistorialCard(
+                            movimientos[index].tipo,
+                            movimientos[index].fecha,
+                            movimientos[index].cantidad,
+                            movimientos[index].tipoMovimiento);
+                      });
+                }),
+          )
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -192,9 +181,9 @@ class homePrincipal extends StatelessWidget {
 }
 
 // cosas del historial (pantalla principal)
-Card HistorialCard(String tipo) {
+Card HistorialCard(String tipo, String fecha, String cantidad, String tipoMov) {
   Color color;
-  if (tipo == "Egreso")
+  if (tipoMov == "Egreso")
     color = Color.fromRGBO(221, 134, 140, 1);
   else
     color = Color.fromRGBO(168, 243, 135, 1);
@@ -210,11 +199,11 @@ Card HistorialCard(String tipo) {
           children: <Widget>[
             Text("$tipo:",
                 textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
-            Text("Fecha",
+            Text("$fecha",
                 textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
-            Text("Cantidad",
+            Text("$cantidad",
                 textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
-            Text("Tipo",
+            Text("$tipoMov",
                 textAlign: TextAlign.left, style: TextStyle(fontSize: 20)),
           ]),
     ),

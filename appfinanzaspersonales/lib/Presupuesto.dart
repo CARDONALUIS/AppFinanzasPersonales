@@ -33,9 +33,9 @@ class PresupuestosPantalla extends StatelessWidget {
                 child: creaCard("Presupuesto: ", presupuesto),
               ),
               // calculamos el presupuesto para determinar el mensaje a mostrar
-              (() {
-                sinPresupuesto(context);
-              }())
+              // (() {
+              //   sinPresupuesto(context);
+              // }())
               // Creamos un widget de forma asyncrona
               // FutureBuilder(
               //   future: obtenTotalMovimientos(uid, 'ingresos'),
@@ -45,12 +45,13 @@ class PresupuestosPantalla extends StatelessWidget {
               //     if (ingresos.hasData) {
               //       widget = SizedBox(
               //         width: double.infinity,
-              //         child: CreaCard("Presupuesto: ", presupuesto),
+              //         child:
+              //             creaCard("Presupuesto: ", ingresos.data.toString()),
               //       );
               //     } else {
               //       widget = SizedBox(
               //           width: double.infinity,
-              //           child: CreaCard("Presupuesto: ", "0.0"));
+              //           child: creaCard("Presupuesto: ", "0.0"));
               //     }
               //     return widget;
               //   },
