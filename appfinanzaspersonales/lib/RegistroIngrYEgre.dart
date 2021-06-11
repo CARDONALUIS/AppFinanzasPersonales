@@ -201,7 +201,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Column(
       children: <Widget>[
         ListTile(
-          title: const Text('Ingresos'),
+          title: const Text('Ingreso'),
           leading: Radio<SingingCharacter>(
             value: SingingCharacter.ingreso,
             groupValue: _character,

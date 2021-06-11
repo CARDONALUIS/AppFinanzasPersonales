@@ -13,35 +13,85 @@ class RegUsuarioPantalla extends StatelessWidget {
         appBar: AppBar(
           title: Text(" "),
         ),
-        body: Center(
-            child: Column(
-          children: <Widget>[
-            registroCard(),
-            FlatButton(
-                child: Text(
-                  '                    Registrar usuario                    ',
-                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
-                ),
-                color: Color.fromRGBO(204, 83, 92, 1),
-                textColor: Colors.white,
-                onPressed: () async {
-                  Navigator.pop(context);
-                  //registerUser();
-                  if (contrasenaController.text ==
-                      contrasenaConfirmacionController.text) {
-                    UserCredential credential = await register(
-                        usuarioController.text, contrasenaController.text);
-                    if (credential.user != null) {
-                      print("USUARIO REGISTRADO");
-                    } else {
-                      print("USUARIO NO REGISTRADO");
-                    }
-                  } else {
-                    print("CONTRASEÑAS NO CONICIDEN");
-                  }
-                }),
+        body: ListView(
+          children: [
+            Center(
+                child: Column(
+              children: <Widget>[
+                registroCard(),
+                FlatButton(
+                    child: Text(
+                      '                    Registrar usuario                    ',
+                      style: TextStyle(
+                          fontSize: 15.0, fontWeight: FontWeight.bold),
+                    ),
+                    color: Color.fromRGBO(204, 83, 92, 1),
+                    textColor: Colors.white,
+                    onPressed: () async {
+                      //registerUser();
+                      if (contrasenaController.text != "" &&
+                          contrasenaConfirmacionController.text != "" &&
+                          usuarioController.text != "") {
+                        if (contrasenaController.text ==
+                            contrasenaConfirmacionController.text) {
+                          UserCredential credential = await register(
+                              usuarioController.text,
+                              contrasenaController.text);
+                          if (credential.user != null) {
+                            final snackBar = SnackBar(
+                              content: Text('Usuario Registrado'),
+                              action: SnackBarAction(
+                                label: 'Deshacer',
+                                onPressed: () {},
+                              ),
+                            );
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                            Navigator.pop(context);
+                          } else {
+                            final snackBar = SnackBar(
+                              content: Text('Usuario no registrado'),
+                              action: SnackBarAction(
+                                label: 'Deshacer',
+                                onPressed: () {},
+                              ),
+                            );
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
+                        } else {
+                          final snackBar = SnackBar(
+                            content: Text('Constraseñas no coinciden'),
+                            action: SnackBarAction(
+                              label: 'Deshacer',
+                              onPressed: () {},
+                            ),
+                          );
+                          // Find the ScaffoldMessenger in the widget tree
+                          // and use it to show a SnackBar.
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      } else {
+                        final snackBar = SnackBar(
+                          content: Text('Hay campos vacios'),
+                          action: SnackBarAction(
+                            label: 'Deshacer',
+                            onPressed: () {},
+                          ),
+                        );
+                        // Find the ScaffoldMessenger in the widget tree
+                        // and use it to show a SnackBar.
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    }),
+              ],
+            ))
           ],
-        )));
+        ));
   }
 
   Future<UserCredential> register(String _email, String _pass) async {
@@ -87,6 +137,7 @@ Card registroCard() {
           padding: const EdgeInsets.only(
               left: 15.0, right: 15.0, top: 15, bottom: 0),
           child: TextField(
+            obscureText: true,
             decoration: InputDecoration(
                 fillColor: Color.fromRGBO(204, 83, 92, 1),
                 border: OutlineInputBorder(),
@@ -99,6 +150,7 @@ Card registroCard() {
           padding: const EdgeInsets.only(
               left: 15.0, right: 15.0, top: 15, bottom: 15),
           child: TextField(
+            obscureText: true,
             decoration: InputDecoration(
                 fillColor: Color.fromRGBO(204, 83, 92, 1),
                 border: OutlineInputBorder(),
