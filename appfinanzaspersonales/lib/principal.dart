@@ -19,41 +19,57 @@ class homePrincipal extends StatelessWidget {
       appBar: AppBar(
         title: Text("Historial"),
       ),
-      body: Column(
-        children: [
-          Flexible(
-            child: FutureBuilder(
-                future: historiales(userActual.currentUser.uid),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done) {
-                    return Center(
-                        child: CircularProgressIndicator(
-                      backgroundColor: Colors.cyanAccent,
-                      valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
-                      strokeWidth: 6,
-                    ));
-                  }
-                  if (snapshot.hasError) {
-                    return Text('hubo un error!');
-                  }
-                  List<movimiento> movimientos = snapshot.data ?? [];
-                  return ListView.builder(
-                      itemCount: movimientos.length,
-                      itemBuilder: (context, index) {
-                        // print(index.toString() +
-                        //     'AAAAAAAAAAAAAAAAAAAAAA' +
-                        //     movimientos[index].cantidad +
-                        //     ' ' +
-                        //     movimientos[index].tipo);
-                        return HistorialCard(
-                            movimientos[index].tipo,
-                            movimientos[index].fecha,
-                            movimientos[index].cantidad,
-                            movimientos[index].tipoMovimiento);
-                      });
-                }),
-          )
-        ],
+      body: RefreshIndicator(
+        onRefresh: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) => this,
+            ),
+            /* PageRouteBuilder(
+              pageBuilder: (a, b, c) => homePrincipal(),
+              transitionDuration: Duration(seconds: 0),
+            ),*/
+          );
+          return;
+        },
+        child: Column(
+          children: [
+            Flexible(
+              child: FutureBuilder(
+                  future: historiales(userActual.currentUser.uid),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      return Center(
+                          child: CircularProgressIndicator(
+                        backgroundColor: Colors.cyanAccent,
+                        valueColor:
+                            new AlwaysStoppedAnimation<Color>(Colors.red),
+                        strokeWidth: 6,
+                      ));
+                    }
+                    if (snapshot.hasError) {
+                      return Text('hubo un error!');
+                    }
+                    List<movimiento> movimientos = snapshot.data ?? [];
+                    return ListView.builder(
+                        itemCount: movimientos.length,
+                        itemBuilder: (context, index) {
+                          // print(index.toString() +
+                          //     'AAAAAAAAAAAAAAAAAAAAAA' +
+                          //     movimientos[index].cantidad +
+                          //     ' ' +
+                          //     movimientos[index].tipo);
+                          return HistorialCard(
+                              movimientos[index].tipo,
+                              movimientos[index].fecha,
+                              movimientos[index].cantidad,
+                              movimientos[index].tipoMovimiento);
+                        });
+                  }),
+            )
+          ],
+        ),
       ),
       drawer: Drawer(
         child: ListView(
